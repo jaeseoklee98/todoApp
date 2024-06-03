@@ -1,9 +1,12 @@
 package com.sparta.todo.controller;
 
 import com.sparta.todo.dto.TodoCreateRequest;
+import com.sparta.todo.dto.TodoDeleteRequest;
 import com.sparta.todo.dto.TodoResponse;
+import com.sparta.todo.model.Todo;
 import com.sparta.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Fetch;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,9 +41,20 @@ public class TodoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<List<TodoResponse>> deleteById(@PathVariable Long id) {
-        List<TodoResponse> response = todoService.deleteById(id);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<String> delete(@PathVariable(name = "id") Long id,
+        @RequestBody TodoDeleteRequest request) {
+
+        todoService.delete(id, request);
+
+        return ResponseEntity.ok("Success");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable(name = "id") Long id,
+         @RequestBody TodoCreateRequest request) {
+        todoService.update(id, request);
+
+        return ResponseEntity.ok("Success");
     }
 
 }
