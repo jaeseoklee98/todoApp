@@ -1,6 +1,7 @@
 package com.sparta.todo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,11 @@ public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "댓글을 입력해주세요.")
     private String comment;
+
+    @Column
     private String username;
 
     @ManyToOne

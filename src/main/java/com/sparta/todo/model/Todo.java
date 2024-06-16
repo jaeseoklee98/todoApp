@@ -1,6 +1,8 @@
 package com.sparta.todo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,18 +18,18 @@ public class Todo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column
     private Long id;
 
     @Column
+    @Email
     private String name;
 
     @Column
-    private String description;
+    @NotBlank
+    private String password;
 
     @Column
-    private String password;
+    private String description;
 
     @Column
     private String manager;
