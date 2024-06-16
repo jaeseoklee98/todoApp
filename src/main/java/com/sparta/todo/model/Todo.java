@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Todo {
+public class Todo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,15 +32,12 @@ public class Todo {
     @Column
     private String manager;
 
-    @Column
-    private String createdAt;
 
     public Todo(String name, String description, String password, String manager) {
         this.name = name;
         this.description = description;
         this.password = password;
         this.manager = manager;
-        this.createdAt = LocalDateTime.now().toString();
     }
 
     // 1번 방법

@@ -64,7 +64,7 @@ public class TodoService {
         repository.delete(todo);
     }
 
-    private Todo findTodoById(Long id) {
+    public Todo findTodoById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("없습니다."));
     }
@@ -79,6 +79,7 @@ public class TodoService {
 
         repository.save(todo);
         }
-    }
+
+}
 
 
