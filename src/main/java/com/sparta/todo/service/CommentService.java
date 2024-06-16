@@ -49,4 +49,22 @@ public class CommentService {
         comment.update(request.getComment());
         return CommentResponse.toDto(comment);
     }
+
+    public void delete(Long id, Long commentId, String username) {
+        if (id == null || commentId == null) {
+            throw new IllegalArgumentException("선택한 일정이나 댓글 ID가 입력되지 않았습니다.");
+        }
+
+        todoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 id에 맞는 일정 데이터가 없습니다. 아이디 : " + id));
+
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new DataNotFoundException("해당 댓글이 DB에 존재하지 않습니다."));
+
+        if(!Objects.equals(comment.getUsername(), username)) {
+            throw new IllegalArgumentException("사용자가 일치하지 않습니다.");
+        }
+
+        commentRepository.delete(comment);
+    }
 }
